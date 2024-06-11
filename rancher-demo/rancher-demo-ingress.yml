@@ -8,6 +8,9 @@ metadata:
   namespace: default
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - example.example.com
   rules:
     - http:
         paths:
