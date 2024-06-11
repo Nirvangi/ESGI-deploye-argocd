@@ -10,7 +10,7 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - example.example.com
+    - demo.starsys.fr
   rules:
     - http:
         paths:
