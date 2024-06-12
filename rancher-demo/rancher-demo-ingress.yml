@@ -6,7 +6,7 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: demo.starsys.fr
     cert-manager.io/issuer: "letsencrypt-prod"
   name: ingress
-  namespace: default
+  namespace: rancher-demo
 spec:
   ingressClassName: nginx
   tls:
