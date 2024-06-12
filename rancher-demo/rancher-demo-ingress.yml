@@ -4,6 +4,7 @@ metadata:
   annotations:
     #kubernetes.io/ingress.class: nginx
     external-dns.alpha.kubernetes.io/hostname: demo.starsys.fr
+    cert-manager.io/issuer: "letsencrypt-prod"
   name: ingress
   namespace: default
 spec:
@@ -11,6 +12,7 @@ spec:
   tls:
   - hosts:
     - demo.starsys.fr
+    secretName: quickstart-example-tls
   rules:
     - http:
         paths:
