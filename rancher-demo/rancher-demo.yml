@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world
+  namespace: rancher-demo
   labels:
     app: hello-world
 
@@ -12,6 +13,7 @@ spec:
       app: hello-world
   template:
     metadata:
+      namespace: rancher-demo
       labels:
         app: hello-world
     spec:
