@@ -12,7 +12,7 @@ spec:
   tls:
   - hosts:
     - demo.starsys.fr
-    secretName: quickstart-example-tls
+    secretName: rancher-demo-tls
   rules:
     - http:
         paths:
