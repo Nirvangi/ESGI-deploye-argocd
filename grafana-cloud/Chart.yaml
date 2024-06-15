@@ -1,6 +1,0 @@
-apiVersion: v2
-name: grafana-k8s-monitoring
-description: A Helm chart for Grafana Kubernetes Monitoring
-type: application
-version: 1.0.0
-appVersion: 1.0.0
