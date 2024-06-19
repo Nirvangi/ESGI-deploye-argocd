@@ -41,7 +41,7 @@ spec:
     #  name: trafficsplits.split.smi-spec.io
     #  kind: CustomResourceDefinition
     #  jsonPointers:
-         - /spec/preserveUnknownFields
+    #     - /spec/preserveUnknownFields
   registry:
     host: "registry.gitlab.mycompany.eu"
     storage:
