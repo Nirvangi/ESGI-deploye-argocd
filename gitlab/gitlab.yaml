@@ -19,7 +19,7 @@ spec:
             value: "external_url 'http://gitlab-service.default/';gitlab_rails['registry_enabled'] = true;gitlab_rails['registry_api_url'] = \"http://172.17.0.2:5000\""
         ports:
         - containerPort: 80
-          name: HTTP
+          name: 80
         volumeMounts:
           - mountPath: /var/opt/gitlab
             name: data
