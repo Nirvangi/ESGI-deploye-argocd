@@ -22,4 +22,4 @@ spec:
               service:
                 name: gitlab
                 port:
-                  number: 80
+                  number: 8081
