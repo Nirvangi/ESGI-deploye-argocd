@@ -1,57 +1,28 @@
-apiVersion: "v1"
-kind: "Secret"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "gitlab-smtp"
-stringData:
-  username: "..."
-  password: "..."
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: gitlab-registry-secret
-stringData:
-  accessKey: "..."
-  secretKey: "..."
----
-apiVersion: "glasskube.eu/v1alpha1"
-kind: "Gitlab"
-metadata:
-  name: "gitlab"
+  name: gitlab-deployment
 spec:
-  host: "gitlab.mycompany.eu"
-  sshEnabled: true
-  sshHost: "ssh.gitlab.mycompany.eu"
-  smtp:
-    host: "..."
-    port: 465
-    fromAddress: "noreply+gitlab@mycompany.eu"
-    authSecret:
-      name: "gitlab-smtp"
-    tlsEnabled: true
-    #syncPolicy:
-    #automated: {}
-    #ignoreDifferences:
-    #- group: apiextensions.k8s.io
-    #  name: trafficsplits.split.smi-spec.io
-    #  kind: CustomResourceDefinition
-    #  jsonPointers:
-    #    - /spec/preserveUnknownFields
-    #- group: apiextensions.k8s.io
-    #  name: trafficsplits.split.smi-spec.io
-    #  kind: CustomResourceDefinition
-    #  jsonPointers:
-    #     - /spec/preserveUnknownFields
-  registry:
-    host: "registry.gitlab.mycompany.eu"
-    storage:
-      s3:
-        bucket: gitlab-registry
-        accessKeySecret:
-          name: gitlab-registry-secret
-          key: accessKey
-        secretKeySecret:
-          name: gitlab-registry-secret
-          key: secretKey
-        region: ...
-
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      containers:
+      - name: gitlab
+        image: gitlab/gitlab-ee
+        env:
+          - name: GITLAB_OMNIBUS_CONFIG
+            value: "external_url 'http://gitlab-service.default/';gitlab_rails['registry_enabled'] = true;gitlab_rails['registry_api_url'] = \"http://172.17.0.2:5000\""
+        ports:
+        - containerPort: 80
+          name: HTTP
+        volumeMounts:
+          - mountPath: /var/opt/gitlab
+            name: data
+      volumes:
+        - name: data
+          emptyDir: {}
