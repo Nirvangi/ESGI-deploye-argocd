@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gitlab-deployment
+  name: gitlab
+  namespace: gitlab-deployment
 spec:
   selector:
     matchLabels:
