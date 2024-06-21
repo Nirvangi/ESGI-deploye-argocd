@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: jitsi
-  namespace: jitsi
+  namespace: jitsi-deployment
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -11,7 +11,7 @@ metadata:
   labels:
     k8s-app: jitsi
   name: jitsi
-  namespace: jitsi
+  namespace: jitsi-deployment
 spec:
   replicas: 1
   strategy:
