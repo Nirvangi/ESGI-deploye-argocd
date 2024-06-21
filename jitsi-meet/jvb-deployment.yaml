@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: {{ .Release.Name }}-jvb
+  name: {{ .Release.Name }}-jvb
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: {{ .Release.Name }}-jvb
+    spec:
+      containers:
+      - env:
+        - name: XMPP_SERVER
+          value: {{ .Release.Name }}-prosody
+        - name: DOCKER_HOST_ADDRESS
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: XMPP_DOMAIN
+          value: {{ .Values.xmpp.domain }}
+        - name: XMPP_AUTH_DOMAIN
+          value: {{ .Values.xmpp.auth_domain }}
+        - name: JVB_PORT
+          value: {{ .Values.jvb.port.udp | quote }}
+        - name: JVB_TCP_PORT
+          value: {{ .Values.jvb.port.tcp | quote }}
+        - name: JVB_AUTH_USER
+          value: {{ .Values.jvb.auth.user }}
+        - name: JVB_AUTH_PASSWORD
+          value: {{ .Values.jvb.auth.password }}
+        - name: JVB_BREWERY_MUC
+          value: jvbbrewery
+        - name: XMPP_INTERNAL_MUC_DOMAIN
+          value: internal-muc.meet.jitsi
+        - name: JVB_STUN_SERVERS
+          value: stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+        - name: TZ
+          value: {{ .Values.timezone }}
+        image: jitsi/jvb
+        name: {{ .Release.Name }}-jvb
+        ports:
+        - containerPort: {{ .Values.jvb.port.udp }}
+          protocol: UDP
+        - containerPort: {{ .Values.jvb.port.tcp }}
+        resources: {}
+{{- if .Values.persistence }}
+        volumeMounts:
+        - mountPath: /config
+          name: data
+          subPath: jvb
+{{- end }}
+      restartPolicy: Always
+{{- if .Values.persistence }}
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc
+{{- end }}
