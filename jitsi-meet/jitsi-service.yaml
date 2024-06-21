@@ -4,7 +4,7 @@ metadata:
   labels:
     service: jvb
   name: jvb-udp
-  namespace: jitsi
+  namespace: jitsi-deployment
 spec:
   type: NodePort
   externalTrafficPolicy: Cluster
@@ -14,4 +14,4 @@ spec:
     targetPort: 30300
     nodePort: 30300
   selector:
-    k8s-app: jitsi
+    k8s-app: jitsi-meet

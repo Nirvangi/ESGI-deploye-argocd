@@ -18,11 +18,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      k8s-app: jitsi
+      k8s-app: jitsi-meet
   template:
     metadata:
       labels:
-        k8s-app: jitsi
+        k8s-app: jitsi-meet
     spec:
       containers:
         - name: jicofo
