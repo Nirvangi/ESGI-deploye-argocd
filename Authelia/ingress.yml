@@ -1,15 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: authelia-ingress
-  namespace: authelia
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: authelia.starsys.fr
-    cert-manager.io/cluster-issuer: "letsencrypt-prod	
+    external-dns.alpha.kubernetes.io/hostname:   authelia.starsys.fr
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  name: ingress
+  namespace: authelia
 spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - authelia.starsys.fr
+    secretName: quickstart-example-tls
   rules:
-    - host: authelia.starsys.fr
-      http:
+  - host: authelia.starsys.fr
+    http:
         paths:
           - path: /
             pathType: Prefix
