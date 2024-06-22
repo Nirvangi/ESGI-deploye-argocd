@@ -20,9 +20,9 @@ spec:
             - containerPort: 9091
             volumeMounts:
             - name: config
-              mountPath: /var/opt/authelia
+              mountPath: /etc/authelia
             - name: users-db
-              mountPath: /config/users_database.yml
+              mountPath: /etc/users_database.yml
               subPath: users_database.yml
       volumes:
         - name: config
@@ -31,5 +31,3 @@ spec:
         - name: users-db
           configMap:
             name: users-database.yml
-
- 	
