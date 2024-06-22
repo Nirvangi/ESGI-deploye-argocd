@@ -1,11 +1,8 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authelia
   namespace: authelia
-  labels:
-    app: authelia
 spec:
   replicas: 1
   selector:
@@ -17,12 +14,11 @@ spec:
         app: authelia
     spec:
       containers:
-      - name: authelia
-        image: authelia/authelia:4.9 #  <----- You should use an explicit version here docker pull 
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 9091
-        volumeMounts:
+        - name: authelia
+          image: authelia/authelia:latest
+          ports:
+            - containerPort: 9091
+ 	volumeMounts:
         - name: config-volume
           mountPath: /etc/authelia
         - name: dbvolume
@@ -35,44 +31,7 @@ spec:
         configMap:
           name: authelia-config
           items:
-          - key: configuration.yml
-            path: configuration.yml
-          - key: users.yaml
-            path: users.yaml           
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: authelia-service
-  namespace: authelia
-spec:
-  selector:
-    app: authelia
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 9091
-
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: authelia.starsys.fr
-  namespace: authelia
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname:   authelia.starsys.fr
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-spec:
-  tls:
-  - secretName: authelia-ingress-tls
-    hosts:
-    - authelia.starsys.fr # This is the host to reach Authelia login page
-  rules:
-  - host: authelia.starsys.fr # This is the host to reach Authelia login page
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: authelia-service
-          servicePort: 80
+          - key: values.yml
+            path: values.yml
+          - key: users_batabases.yaml
+            path: users_database.yaml 
