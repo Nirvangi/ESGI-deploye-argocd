@@ -2,6 +2,6 @@ resources:
   - ingress.yaml
 
 configMapGenerator:
-  - name: authelia-users-database
+  - name: users-database.yml
     files: values.yml
       - users_database.yml
