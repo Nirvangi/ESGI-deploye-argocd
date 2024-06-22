@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-server-pvc
+  namespace: nextcloud
+spec:
+  storageClassName: "" 
+  volumeName: nextcloud-server-pv-nfs
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Ti

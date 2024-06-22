@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nextcloud-ingress
+  namespace: nextcloud
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: nextcloud-headers@kubernetescrd,nextcloud-redirects@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    cert-manager.io/cluster-issuer: letsencrypt-aws
+spec:
+  rules:
+    - host: your.nextcloud.domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 80
+  tls:
+    - secretName: ssl-cert
+      hosts:
+        - your.nextcloud.domain
+
