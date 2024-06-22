@@ -7,7 +7,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  storageClassName: csi-cinder-classic #longhorn
   resources:
     requests:
       storage: 5Gi
@@ -20,7 +20,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: nfs-client
+  storageClassName: csi-cinder-classic #nfs-client
   resources:
     requests:
       storage: 100Gi

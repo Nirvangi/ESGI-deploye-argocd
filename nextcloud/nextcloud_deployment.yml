@@ -1,0 +1,118 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  namespace: nextcloud-deployment
+  labels:
+    app: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      containers:
+        - image: nextcloud:25.0.3-apache
+          name: nextcloud
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: POSTGRES_HOST
+              value: postgresql
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_DB
+                  name: nextcloud-secrets
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USER
+                  name: nextcloud-secrets
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: nextcloud-secrets
+            - name: NEXTCLOUD_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  key: NEXTCLOUD_ADMIN_USER
+                  name: nextcloud-secrets
+            - name: NEXTCLOUD_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: NEXTCLOUD_ADMIN_PASSWORD
+                  name: nextcloud-secrets
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: your.nextcloud.domain
+            - name: NEXTCLOUD_DATA_DIR
+              value: /mnt/data
+            # - name: OBJECTSTORE_S3_HOST
+            #   value: your.s3.host
+            # - name: OBJECTSTORE_S3_REGION
+            #   value: gso-rack-1
+            # - name: OBJECTSTORE_S3_BUCKET
+            #   value: nextcloud
+            # - name: OBJECTSTORE_S3_PORT
+            #   value: "9000"
+            # - name: OBJECTSTORE_S3_SSL
+            #   value: "true"
+            # - name: OBJECTSTORE_S3_USEPATH_STYLE
+            #   value: "true"
+            # - name: OBJECTSTORE_S3_KEY
+            #   valueFrom:
+            #     secretKeyRef:
+            #       key: OBJECTSTORE_S3_KEY
+            #       name: nextcloud-secrets
+            # - name: OBJECTSTORE_S3_SECRET
+            #   valueFrom:
+            #     secretKeyRef:
+            #       key: OBJECTSTORE_S3_SECRET
+            #       name: nextcloud-secrets
+            - name: TRUSTED_PROXIES
+              value: 192.168.4.0/24 10.0.0.0/16 # This includes my router IP address and the CIDR range of the cluster
+            - name: APACHE_DISABLE_REWRITE_IP
+              value: "1"
+            - name: OVERWRITEHOST
+              value: your.nextcloud.domain
+            - name: OVERWRITEPROTOCOL
+              value: https
+            - name: OVERWRITECLIURL
+              value: https://your.nextcloud.domain
+            - name: OVERWRITEWEBROOT
+              value: "/"
+            - name: PHP_MEMORY_LIMIT
+              value: 4G
+            - name: PHP_UPLOAD_LIMIT
+              value: 1G
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: nextcloud-storage
+              readOnly: false
+            - mountPath: /mnt/data
+              name: nextcloud-storage-nfs
+              readOnly: false
+      volumes:
+        - name: nextcloud-storage
+          persistentVolumeClaim:
+            claimName: nextcloud-pvc
+        - name: nextcloud-storage-nfs
+          persistentVolumeClaim:
+            claimName: nextcloud-pvc-nfs
+

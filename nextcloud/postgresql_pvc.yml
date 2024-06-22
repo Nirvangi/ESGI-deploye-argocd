@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  storageClassName: csi-cinder-classic #longhorn
   resources:
     requests:
       storage: 2Gi
