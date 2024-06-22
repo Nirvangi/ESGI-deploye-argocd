@@ -3,7 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: headers
-  namespace: nextcloud
+  namespace: nextcloud-deployment
 spec:
   headers:
     frameDeny: true
@@ -16,7 +16,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirects
-  namespace: nextcloud
+  namespace: nextcloud-deployment
 spec:
   redirectScheme:
     permanent: true

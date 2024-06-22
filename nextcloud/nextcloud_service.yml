@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nextcloud
-  namespace: nextcloud
+  namespace: nextcloud-deployment
   labels:
     app: nextcloud
 spec:

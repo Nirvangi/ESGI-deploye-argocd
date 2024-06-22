@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
-  namespace: nextcloud
+  namespace: nextcloud-deployment
   labels:
     app: postgresql
 spec:

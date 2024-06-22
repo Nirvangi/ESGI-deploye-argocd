@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nextcloud-ingress
-  namespace: nextcloud
+  namespace: nextcloud-deployment
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: nextcloud-headers@kubernetescrd,nextcloud-redirects@kubernetescrd
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
