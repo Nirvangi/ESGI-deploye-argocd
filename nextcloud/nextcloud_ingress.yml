@@ -1,16 +1,14 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nextcloud.starsys.fr
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   name: nextcloud-ingress
   namespace: nextcloud-deployment
-  annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: nextcloud-headers@kubernetescrd,nextcloud-redirects@kubernetescrd
-    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    cert-manager.io/cluster-issuer: letsencrypt-aws
 spec:
   rules:
-    - host: your.nextcloud.domain
+    - host: nextcloud.starsys.fr
       http:
         paths:
           - path: /
@@ -23,5 +21,5 @@ spec:
   tls:
     - secretName: ssl-cert
       hosts:
-        - your.nextcloud.domain
+        - nextcloud.starsys.fr
 
