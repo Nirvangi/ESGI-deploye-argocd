@@ -27,7 +27,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: authelia-config
+            name: values.yml
         - name: users-db
           configMap:
-            name: authelia-users-database
+            name: users-database.yml
