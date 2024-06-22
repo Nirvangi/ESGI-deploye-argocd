@@ -3,5 +3,5 @@ resources:
 
 configMapGenerator:
   - name: authelia-users-database
-    files:
+    files: values.yml
       - users_database.yml
