@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: wordpress.starsys.fr
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  name: ingress
+  namespace: wordpress
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - wordpress.starsys.fr
+    secretName: quickstart-example-tls
+  rules:
+  - host: wordpress.starsys.fr
+    http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress-service
+                port:
+                  number: 8082
