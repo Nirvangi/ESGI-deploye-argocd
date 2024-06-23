@@ -22,7 +22,7 @@ spec:
               memory: "2G"
           volumeMounts:
             - name: "jira-home"
-              mountPath: "/opt/jira-home"
+              mountPath: /opt/jira-home
           volumes:
             - name: "jira-home"
               persistentVolumeClaim:
