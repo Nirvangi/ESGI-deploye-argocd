@@ -18,7 +18,7 @@ spec:
         image: wordpress:6-php8.0
         ports:
         - name: http-port
-          containerPort: 80
+          containerPort: 8080
         env:
           - name: WORDPRESS_DB_PASSWORD
             valueFrom:
