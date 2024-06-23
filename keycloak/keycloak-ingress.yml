@@ -4,10 +4,11 @@ metadata:
   name: keycloak-ingress
   namespace: keycloak
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    external-dns.alpha.kubernetes.io/hostname: gkeylock.starsys.fr
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-    - host: keycloak.example.com
+    - host: keycloak.starsys.fr
       http:
         paths:
           - path: /
