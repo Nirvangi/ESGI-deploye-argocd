@@ -25,8 +25,8 @@ data:
         - domain: example.com
           policy: two_factor
     session:
-      name: authelia_session
-      secret: "your_secret"
+      name: authelia
+      secret: "toto!!!!"
       expiration: 3600
       inactivity: 300
       domain: example.com
