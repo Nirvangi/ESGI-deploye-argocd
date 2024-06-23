@@ -1,7 +1,0 @@
-resources:
-  - ingress.yaml
-
-configMapGenerator:
-  - name: users-database.yml
-    files: values.yml
-      - users_database.yml
