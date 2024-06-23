@@ -17,24 +17,17 @@ spec:
         - name: authelia
           image: authelia/authelia:latest
           ports:
-            - containerPort: 9091
+            - containerPort: 9091           
           volumeMounts:
             - name: config
-              mountPath: /config
-              subPath: configuration.yml
+              mountPath: /var/opt/authelia
             - name: users-db
-              mountPath: /config/users_database.yml
-              subPath: users_database.yml
+              mountPath: /var/opt/users_database
+              subPath: users_database
       volumes:
         - name: config
+          configMap:values
+            name: values.yml
+        - name: users_databases
           configMap:
-            name: authelia-config
-            items:
-              - key: values.yml
-                path: values.yml
-        - name: users-db
-          configMap:
-            name: authelia-users-database
-            items:
-              - key: users_database.yml
-                path: users_database.yml
+            name: users-database
