@@ -5,7 +5,7 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: wordpress.starsys.fr
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   name: ingress
-  namespace: wordpress-deployment
+  namespace: wordpress
 spec:
   ingressClassName: nginx
   tls:
