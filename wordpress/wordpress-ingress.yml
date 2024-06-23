@@ -22,4 +22,4 @@ spec:
               service:
                 name: wordpress-service
                 port:
-                  number: 31001
+                  number: 8080
