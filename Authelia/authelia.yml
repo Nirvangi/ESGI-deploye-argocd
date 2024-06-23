@@ -23,8 +23,8 @@ spec:
               mountPath: /config/configuration.yml
               subPath: configuration.yml
             - name: config
-              mountPath: /config/users_database.yml
-              subPath: users_database.yml
+              mountPath: /config/authelia-users-database.yml
+              subPath: authelia-users-database.yml
       volumes:
         - name: config
           configMap:
