@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authelia-users-database
+  namespace: authelia
+data:
+  users_database.yml: |
+    users:
+  sidy:
+    displayname: Sidy CISSE
+    password: hashed_password
+    email: scisse18@myges.fr
+  Thomas:
+    displayname: Thomas COLIN
+    password: hashed_password
+    email: tcolin4@myges.fr
+  Gift MPETI BOMENGO:
+    displayname: Gift MPETI
+    password: hashed_password
+    email: gmpetibomengo@myges.fr
+  Maxime:
+    displayname: Maxime JACOB
+    password: hashed_password
+    email: mjacob12@myges.fr
+  Tristan:
+    displayname: Tristan CACCHIA
+    password: hashed_password
+    email: tcacchia@myges.fr
+    groups:
+      - admin
+      - devs
