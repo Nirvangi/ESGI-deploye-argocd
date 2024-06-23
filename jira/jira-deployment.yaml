@@ -4,6 +4,7 @@ metadata:
   labels:
     app: jira
   name: jira
+  namespace: jira-deployment
 spec:
   replicas: 3
   template:
