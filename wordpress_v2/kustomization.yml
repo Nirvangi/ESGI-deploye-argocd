@@ -1,4 +1,3 @@
-cat <<EOF >./kustomization.yaml
 secretGenerator:
 - name: mysql-pass
   literals:
@@ -6,4 +5,3 @@ secretGenerator:
 resources:
   - mysql-deployment.yaml
   - wordpress-deployment.yaml
-EOF
