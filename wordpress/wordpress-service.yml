@@ -20,7 +20,7 @@ metadata:
 spec:
   ports:
     - name: web
-      port: 8088
+      port: 8080
       targetPort: web
   selector:
     app: wordpress
