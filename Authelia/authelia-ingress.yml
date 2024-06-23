@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
-    - host: auth.example.com
+    - host: authelia.starsys.fr
       http:
         paths:
           - path: /
