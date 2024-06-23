@@ -18,7 +18,7 @@ data:
         path: /config/db.sqlite3
     authentication_backend:
       file:
-        path: /config/users_database.yml
+        path: /etc/users_database.yml
     access_control:
       default_policy: deny
       rules:
