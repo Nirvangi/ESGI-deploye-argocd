@@ -22,8 +22,13 @@ spec:
           volumeMounts:
             - name: "jira-home"
               mountPath: /opt/jira-home
-      volumes:
-        - name: "jira-home"
-          gcePersistentDisk:
-            pdName: jira-home
-            fsType: ext4
+          volumes:
+            - name: "jira-home"
+          persistentVolumeClaim:
+            claimName: jira-pvc
+     
+#          volumes:
+#        - name: "jira-home"
+#          gcePersistentDisk:
+#            pdName: jira-home
+#           fsType: ext4
