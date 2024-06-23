@@ -21,6 +21,6 @@ spec:
   ports:
     - name: web
       port: 8080
-      targetPort: web
+      targetPort: http-port
   selector:
     app: wordpress
