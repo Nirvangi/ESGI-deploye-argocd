@@ -22,7 +22,7 @@ spec:
             - name: config
               mountPath: /config/configuration.yml
               subPath: configuration.yml
-            - name: users-db
+            - name: data
               mountPath: /config/users_database.yml
               subPath: users_database.yml
       volumes:
@@ -32,7 +32,7 @@ spec:
             items:
               - key: configuration.yml
                 path: configuration.yml
-        - name: users-db
+        - name: data
           configMap:
             name: authelia-users-database
             items:
