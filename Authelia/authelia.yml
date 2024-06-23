@@ -34,7 +34,7 @@ spec:
                 path: configuration.yml
         - name: data
           configMap:
-            name: authelia-users-database
+            name: authelia-users-database.yml
             items:
               - key: users_database.yml
                 path: users_database.yml
