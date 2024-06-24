@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitlab-helm
+  namespace: argocd-staging
+spec:
+  project: default
+  sources:
+    - repoURL: http://charts.gitlab.io/
+      targetRevision: "8.1.0"
+      chart: gitlab
+      helm:
+        valueFiles:
+          - $values/gitlab-helm/values.yaml
+    - repoURL: https://github.com/Nirvangi/ESGI-deploye-argocd.git
+      targetRevision: "HEAD"
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gitlab-helm
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

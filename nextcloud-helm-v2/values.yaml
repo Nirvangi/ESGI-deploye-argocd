@@ -26,7 +26,7 @@ ingress:
   enabled: true
   className: nginx
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: demo.starsys.fr
+    external-dns.alpha.kubernetes.io/hostname: nextcloud.starsys.fr
     cert-manager.io/cluster-issuer: letsencrypt-prod
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
   #  kubernetes.io/tls-acme: "true"

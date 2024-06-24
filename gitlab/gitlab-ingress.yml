@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - gitlab.starsys.fr
-    secretName: quickstart-example-tls
+    secretName: gitlab-tls
   rules:
   - host: gitlab.starsys.fr
     http:
