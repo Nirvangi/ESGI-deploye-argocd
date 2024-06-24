@@ -87,8 +87,6 @@ global:
     tls:
       enabled: true
       secretName: gitlab-tls
-      hosts:
-        - gitlab.starsys.fr
     path: /
     pathType: Prefix
 
