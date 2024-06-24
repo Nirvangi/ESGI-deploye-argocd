@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud-helm
+  namespace: argocd-staging
+spec:
+  project: default
+  sources:
+    - repoURL: https://nextcloud.github.io/helm/
+      targetRevision: "5.0.1"
+      chart: nextcloud
+      helm:
+        valueFiles:
+          - $values/nextcloud-helm-v2/values.yaml
+    - repoURL: https://github.com/Haibread/infrastructure.git
+      targetRevision: "HEAD"
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nextcloud-helm
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
