@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,7 +17,7 @@ spec:
     spec:
       containers:
       - name: authelia
-        image: authelia/authelia:4.9 #  <----- You should use an explicit version here docker pull 
+        image: authelia/authelia:latest 
         imagePullPolicy: Always
         ports:
         - containerPort: 9091
