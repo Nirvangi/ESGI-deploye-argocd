@@ -1,11 +1,4 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: authelia-users-database
-  namespace: authelia
-data:
-  users_database.yml: |
-    users:
+users:
   sidy:
     displayname: Sidy CISSE
     password: hashed_password

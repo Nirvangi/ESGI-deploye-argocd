@@ -4,6 +4,7 @@ metadata:
   labels:
     app: jira
   name: jira
+  namespace: jira-deployment
 spec:
   replicas: 3
   template:
@@ -14,7 +15,8 @@ spec:
     spec:
       containers:
         - name: jira
-          image: "gcr.io/hightowerlabs/jira:7.3.6-standalone"
+#          image: "gcr.io/hightowerlabs/jira:7.3.6-standalone"
+          image: "atlassian/jira-software"
           resources:
             requests:
               cpu: "2"
@@ -24,8 +26,8 @@ spec:
               mountPath: /opt/jira-home
           volumes:
             - name: "jira-home"
-          persistentVolumeClaim:
-            claimName: jira-pvc
+              persistentVolumeClaim:
+                claimName: jira-pvc
      
 #          volumes:
 #        - name: "jira-home"

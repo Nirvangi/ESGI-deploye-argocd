@@ -20,21 +20,14 @@ spec:
             - containerPort: 9091
           volumeMounts:
             - name: config
-              mountPath: /config/configuration.yml
-              subPath: configuration.yml
-            - name: data
+              mountPath: /config
+            - name: users-db
               mountPath: /config/users_database.yml
               subPath: users_database.yml
       volumes:
         - name: config
           configMap:
             name: authelia-config
-            items:
-              - key: configuration.yml
-                path: configuration.yml
-        - name: data
+        - name: users-db
           configMap:
             name: authelia-users-database
-            items:
-              - key: users_database.yml
-                path: users_database.yml

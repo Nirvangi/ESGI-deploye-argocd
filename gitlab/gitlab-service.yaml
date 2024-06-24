@@ -7,6 +7,6 @@ spec:
   selector:
     app: gitlab
   ports:
-  - port: 80
-    targetPort: 80
+  - port: 8081
+    targetPort: 8081
     name: http

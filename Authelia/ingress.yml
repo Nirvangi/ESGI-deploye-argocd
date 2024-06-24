@@ -5,7 +5,7 @@ metadata:
   namespace: authelia
   annotations:
     external-dns.alpha.kubernetes.io/hostname: authelia.starsys.fr
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod	
 spec:
   rules:
     - host: authelia.starsys.fr

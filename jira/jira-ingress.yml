@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: jira.starsys.fr
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  name: ingress
+  namespace: jira-deployment
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - jira.starsys.fr
+    secretName: quickstart-example-tls
+  rules:
+  - host: jira.starsys.fr
+    http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jira
+                port:
+                  number: 8082     
