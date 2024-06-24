@@ -17,10 +17,10 @@ spec:
         image: gitlab/gitlab-ee
         env:
           - name: GITLAB_OMNIBUS_CONFIG
-            value: "external_url 'http://gitlab-service.default/';gitlab_rails['registry_enabled'] = true;gitlab_rails['registry_api_url'] = \"http://172.17.0.2:5000\""
+            value: "external_url 'http://gitlab.starsys.fr/';gitlab_rails['registry_enabled'] = true;gitlab_rails['registry_api_url'] = \"http://172.17.0.2:5000\""
         ports:
         - containerPort: 8081
-          #name: 80
+          name: web
         volumeMounts:
           - mountPath: /var/opt/gitlab
             name: data
