@@ -12,7 +12,7 @@ spec:
       helm:
         valueFiles:
           - $values/nextcloud-helm-v2/values.yaml
-    - repoURL: https://github.com/Haibread/infrastructure.git
+    - repoURL: https://github.com/Nirvangi/ESGI-deploye-argocd.git
       targetRevision: "HEAD"
       ref: values
   destination:
