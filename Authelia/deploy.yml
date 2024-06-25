@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: authelia
   namespace: authelia
-  labels:
-    app: authelia
 spec:
   replicas: 1
   selector:
@@ -16,25 +14,27 @@ spec:
         app: authelia
     spec:
       containers:
-      - name: authelia
-        image: authelia/authelia:latest 
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 9091
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/authelia
-        - name: dbvolume
-          mountPath: /var/lib/authelia       
+        - name: authelia
+          image: authelia/authelia:latest
+          ports:
+            - containerPort: 9091
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: configuration.yml
+            - name: users-db
+              mountPath: /config/users_database.yml
+              subPath: users_database.yml
       volumes:
-      - name: dbvolume
-        emptyDir:
-          {}
-      - name: config-volume
-        configMap:
-          name: authelia-config
-          items:
-          - key: configuration.yml
-            path: configuration.yml
-          - key: users.yaml
-            path: users.yaml           
+        - name: config
+          configMap:
+            name: authelia-config
+            items:
+              - key: configuration.yml
+                path: configuration.yml
+        - name: users-db
+          configMap:
+            name: authelia-users-database
+            items:
+              - key: users_database.yml
+                path: users_database.yml
