@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: elasticsearch.starsys.fr
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  name: ingress-elasticsearch
+  namespace: elk
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - elasticsearch.starsys.fr
+    secretName: elasticsearch-tls
+  rules:
+  - host: elasticsearch.starsys.fr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: elasticsearch
+            port:
+              number: 9200
